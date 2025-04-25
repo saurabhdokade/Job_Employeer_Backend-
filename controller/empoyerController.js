@@ -9,7 +9,7 @@ require("dotenv").config();
 
 //SignUp User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  console.log(req.body)
+  // console.log(req.body)
   const { fullname, username, email, password, confirmPassword } = req.body;
 
   if (!fullname || !username || !email || !password || !confirmPassword) {
@@ -90,7 +90,7 @@ exports.sendOTP = catchAsyncErrors(async (req, res) => {
       await user.save();
 
       // Optional: Log OTP in console for testing
-      console.log(`Phone OTP for ${phone}: ${otp}`);
+      // console.log(`Phone OTP for ${phone}: ${otp}`);
 
       // Try sending OTP via Twilio
       try {
@@ -120,7 +120,7 @@ exports.sendOTP = catchAsyncErrors(async (req, res) => {
       await user.save();
 
       // Optional: Log OTP in console for testing
-      console.log(`Email OTP for ${email}: ${otp}`);
+      // console.log(`Email OTP for ${email}: ${otp}`);
 
       // Try sending OTP via Email
       try {

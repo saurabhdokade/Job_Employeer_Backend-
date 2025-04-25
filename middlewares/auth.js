@@ -79,17 +79,17 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
   try {
       let token = req.header("Authorization");
 
-      console.log("Token:", token); // Log the token for debugging
+      // console.log("Token:", token); // Log the token for debugging
 
       if (!token || !token.startsWith("Bearer ")) {
           return res.status(401).json({ msg: "Access Denied: No token provided" });
       }
 
       token = token.split(" ")[1];
-      console.log("Token after split:", token); // Log the token for debugging
+      // console.log("Token after split:", token); // Log the token for debugging
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      console.log("Decoded:", decoded); // Log the decoded payload for debugging
+      // console.log("Decoded:", decoded); // Log the decoded payload for debugging
 
       const user = await User.findById(decoded.id).select("-password");
       if (!user)
@@ -107,17 +107,17 @@ exports.isAuthenticatedCandidate = catchAsyncErrors(async (req, res, next) => {
   try {
       let token = req.header("Authorization");
 
-      console.log("Token:", token); // Log the token for debugging
+      // console.log("Token:", token); // Log the token for debugging
 
       if (!token || !token.startsWith("Bearer ")) {
           return res.status(401).json({ msg: "Access Denied: No token provided" });
       }
 
       token = token.split(" ")[1];
-      console.log("Token after split:", token); // Log the token for debugging
+      // console.log("Token after split:", token); // Log the token for debugging
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      console.log("Decoded:", decoded); // Log the decoded payload for debugging
+      // console.log("Decoded:", decoded); // Log the decoded payload for debugging
 
       const user = await Candidate.findById(decoded.id).select("-password");
       if (!user)

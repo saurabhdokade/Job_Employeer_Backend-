@@ -260,9 +260,9 @@ const qs = require('qs');
 exports.updateCompanyInfo = catchAsyncErrors(async (req, res, next) => {
   const userId = req.user?._id;
 
-  console.log("🔐 User ID from token:", userId);
-  console.log("📦 Raw req.body:", req.body);
-  console.log("🖼️ Uploaded files:", req.files);
+  // console.log("🔐 User ID from token:", userId);
+  // console.log("📦 Raw req.body:", req.body);
+  // console.log("🖼️ Uploaded files:", req.files);
 
   if (!userId) {
     return next(new ErrorHander("Unauthorized: user ID not found.", 401));
@@ -293,7 +293,7 @@ exports.updateCompanyInfo = catchAsyncErrors(async (req, res, next) => {
   let existingProfile = await EmployerProfile.findOne({ user: userId });
 
   if (!existingProfile) {
-    console.log("ℹ️ No profile found. Creating new one...");
+    // console.log("ℹ️ No profile found. Creating new one...");
     existingProfile = new EmployerProfile({
       user: userId,
       companyInfo: companyInfo,
@@ -398,8 +398,8 @@ exports.updateSocialMedia = catchAsyncErrors(async (req, res, next) => {
 exports.updateAccountSettings = catchAsyncErrors(async (req, res, next) => {
   const userId = req.user._id;
   const { accountSettings } = req.body; // No need for qs.parse
-  console.log("🔐 User ID from token:", userId);
-  console.log("📦 Raw req.body:", req.body);
+  // console.log("🔐 User ID from token:", userId);
+  // console.log("📦 Raw req.body:", req.body);
 
   // Check if phone number and email are provided
   if (!accountSettings?.phone?.number || !accountSettings?.email) {

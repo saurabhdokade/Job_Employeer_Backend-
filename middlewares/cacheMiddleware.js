@@ -14,7 +14,7 @@ const cacheMiddleware = async (req, res, next) => {
     const cacheData = await redisClient.get(cacheKey);
 
     if (cacheData) {
-      console.log("✅ Cache Hit:", cacheKey);
+      // console.log("✅ Cache Hit:", cacheKey);
       return res.status(200).json(JSON.parse(cacheData));
     }
     
@@ -22,7 +22,7 @@ const cacheMiddleware = async (req, res, next) => {
     const redisClient = new Redis({ host: '127.0.0.1', port: 6379 });
 
 
-    console.log("⚠️ Cache Miss:", cacheKey);
+    // console.log("⚠️ Cache Miss:", cacheKey);
     
     // Override res.json to store response in Redis
     const sendResponse = res.json.bind(res);
