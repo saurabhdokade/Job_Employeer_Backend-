@@ -10,6 +10,7 @@ const {
   updateUser,
   getAllUsers,
   deleteUser,
+  socialLoginCallback,
   // getCandidateDetails,
   // saveCandidate,
   logout,
@@ -33,6 +34,31 @@ router.route("/password/forgot").post(forgotPassword);
 router.route("/password/reset").put(verifyOtpAndResetPassword);
 router.route("/users/:id").put(isAuthenticatedUser, upload.single("userProfile"), updateUser)
 router.route("/users/:id").delete(isAuthenticatedUser, deleteUser);
+
+
+
+
+//social login
+
+
+
+const passport = require("passport");
+
+
+// Google
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+router.get("/google/callback", passport.authenticate("google", { session: false }), socialLoginCallback);
+
+// Facebook
+router.get("/facebook", passport.authenticate("facebook", { scope: ["email"] }));
+router.get("/facebook/callback", passport.authenticate("facebook", { session: false }), socialLoginCallback);
+
+// LinkedIn
+router.get("/linkedin", passport.authenticate("linkedin"));
+router.get("/linkedin/callback", passport.authenticate("linkedin", { session: false }), socialLoginCallback);
+
+
+
 
 //all employee
 router.get("/admin/users", getAllUsers);

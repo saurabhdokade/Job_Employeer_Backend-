@@ -7,6 +7,18 @@ const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
 
+exports.socialLoginCallback = async (req, res) => {
+  const user = req.user;
+
+  if (!user) {
+    return res.status(401).json({ success: false, message: "Authentication failed" });
+  }
+
+  // Send JWT token
+  sendToken(user, 200, res);
+};
+
+
 //SignUp User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   // console.log(req.body)

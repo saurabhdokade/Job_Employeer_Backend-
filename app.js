@@ -31,6 +31,7 @@ app.use("/api/v1", overviewRoutes);
 app.use("/api/v1/", postJobRouts);
 app.use("/api/v1", candidateRoutes);
 app.use("/api/v1/", SubscriptionRoutes);
+
 // Rate Limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -39,6 +40,12 @@ const limiter = rateLimit({
   keyGenerator: (req) => req.ip,
 });
 app.use(limiter);
+
+const passport = require("passport");
+require("../Backend/config/passport");
+
+app.use(passport.initialize());
+
 
 // Error Handling
 app.use(errorMiddleware);
